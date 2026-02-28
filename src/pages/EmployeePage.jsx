@@ -68,6 +68,11 @@ function EmployeesPage({ darkMode, setDarkMode }) {
         fetchEmployees();
     }, [fetchEmployees]);
 
+    // Reset to first page when search keyword changes
+    useEffect(() => {
+        setPage(0);
+    }, [searchKeyword]);
+
     // Show notification
     const showNotification = (message, severity = 'success') => {
         setSnackbar({ open: true, message, severity });
@@ -142,10 +147,6 @@ function EmployeesPage({ darkMode, setDarkMode }) {
                     <SearchBar
                         value={searchKeyword}
                         onChange={setSearchKeyword}
-                        onSearch={() => {
-                            setPage(0);
-                            fetchEmployees();
-                        }}
                     />
                     <Button
                         variant="contained"

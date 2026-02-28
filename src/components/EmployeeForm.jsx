@@ -46,7 +46,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                 hireDate: null,
             });
         }
-        setErrors({});
+        setErrors({}); // clear errors when form opens
     }, [employee, open]);
 
     const validate = () => {
