@@ -162,4 +162,10 @@ REACT_APP_API_URL=http://localhost:9090/api
 ---
 
 
+<img width="1918" height="969" alt="Screenshot 2026-03-01 195927" src="https://github.com/user-attachments/assets/75b86dac-bbfc-4512-8db7-ade2c60be8ce" />
+<img width="1913" height="966" alt="Screenshot 2026-03-01 195853" src="https://github.com/user-attachments/assets/1d5de7bd-0774-4c3c-8b65-0f3636dccd41" />
+<img width="1917" height="964" alt="Screenshot 2026-03-01 195828" src="https://github.com/user-attachments/assets/90401dc7-3df2-4754-b973-bb86ddb642e5" />
+<img width="1916" height="967" alt="Screenshot 2026-03-01 195758" src="https://github.com/user-attachments/assets/c4d775fa-af86-4f6a-a1e9-016ed80752b4" />
+<img width="1917" height="971" alt="Screenshot 2026-03-01 195717" src="https://github.com/user-attachments/assets/bc0ae4f5-2527-4ea4-ac65-4a36e98cbf1d" />
+
 
