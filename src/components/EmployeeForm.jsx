@@ -7,12 +7,17 @@ import {
     TextField,
     Button,
     Grid,
+    useMediaQuery,
+    useTheme,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -98,13 +103,13 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
     };
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth fullScreen={fullScreen}>
             <DialogTitle>
                 {employee ? 'Edit Employee' : 'Add New Employee'}
             </DialogTitle>
             <DialogContent>
                 <Grid container spacing={2} sx={{ mt: 1 }}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             name="firstName"
                             label="First Name *"
@@ -115,7 +120,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                             helperText={errors.firstName}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             name="lastName"
                             label="Last Name *"
@@ -138,7 +143,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                             helperText={errors.email}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             name="department"
                             label="Department"
@@ -147,7 +152,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             name="role"
                             label="Role"
@@ -156,7 +161,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             name="salary"
                             label="Salary"
@@ -171,7 +176,7 @@ const EmployeeForm = ({ open, onClose, onSubmit, employee }) => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
                                 label="Hire Date"

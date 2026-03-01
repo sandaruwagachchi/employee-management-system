@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { IconButton } from '@mui/material';
+import { IconButton, Box } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { format } from 'date-fns';
 
@@ -18,16 +18,17 @@ const EmployeeTable = ({
     onDelete
 }) => {
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First Name', width: 130 },
-        { field: 'lastName', headerName: 'Last Name', width: 130 },
-        { field: 'email', headerName: 'Email', width: 200 },
-        { field: 'department', headerName: 'Department', width: 150 },
-        { field: 'role', headerName: 'Role', width: 150 },
+        { field: 'id', headerName: 'ID', width: 70, minWidth: 50 },
+        { field: 'firstName', headerName: 'First Name', flex: 1, minWidth: 100 },
+        { field: 'lastName', headerName: 'Last Name', flex: 1, minWidth: 100 },
+        { field: 'email', headerName: 'Email', flex: 1.5, minWidth: 150 },
+        { field: 'department', headerName: 'Department', flex: 1, minWidth: 100 },
+        { field: 'role', headerName: 'Role', flex: 1, minWidth: 100 },
         {
             field: 'salary',
             headerName: 'Salary',
-            width: 130,
+            flex: 1,
+            minWidth: 100,
             valueFormatter: (value) => {
                 if (!value) return '-';
                 return new Intl.NumberFormat('en-US', {
@@ -39,7 +40,8 @@ const EmployeeTable = ({
         {
             field: 'hireDate',
             headerName: 'Hire Date',
-            width: 120,
+            flex: 0.8,
+            minWidth: 100,
             valueFormatter: (value) => {
                 if (!value) return '-';
                 return format(new Date(value), 'yyyy-MM-dd');
@@ -48,8 +50,9 @@ const EmployeeTable = ({
         {
             field: 'actions',
             headerName: 'Actions',
-            width: 120,
+            width: 100,
             sortable: false,
+            disableColumnMenu: true,
             renderCell: (params) => (
                 <>
                     <IconButton onClick={() => onEdit(params.row)} size="small">
@@ -64,7 +67,10 @@ const EmployeeTable = ({
     ];
 
     return (
-        <div style={{ height: 500, width: '100%' }}>
+        <Box sx={{
+            height: { xs: 400, sm: 500, md: 600 },
+            width: '100%',
+        }}>
             <DataGrid
                 rows={employees}
                 columns={columns}
@@ -88,7 +94,7 @@ const EmployeeTable = ({
                     },
                 }}
             />
-        </div>
+        </Box>
     );
 };
 

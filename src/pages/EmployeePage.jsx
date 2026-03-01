@@ -141,9 +141,16 @@ function EmployeesPage({ darkMode, setDarkMode }) {
                 </Toolbar>
             </AppBar>
 
-            <Box sx={{ p: 3 }}>
+            <Box sx={{ p: { xs: 1, sm: 2, md: 3 } }}>
                 {/* Toolbar */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    justifyContent: 'space-between',
+                    alignItems: { xs: 'stretch', sm: 'center' },
+                    gap: 2,
+                    mb: 2
+                }}>
                     <SearchBar
                         value={searchKeyword}
                         onChange={setSearchKeyword}
@@ -152,6 +159,7 @@ function EmployeesPage({ darkMode, setDarkMode }) {
                         variant="contained"
                         startIcon={<AddIcon />}
                         onClick={handleAddClick}
+                        sx={{ whiteSpace: 'nowrap' }}
                     >
                         Add Employee
                     </Button>

@@ -35,12 +35,15 @@ const SearchBar = ({ value, onChange }) => {
             placeholder="Search by name or department..."
             variant="outlined"
             size="small"
-            sx={{ width: 300 }}
+            sx={{
+                width: { xs: '100%', sm: 300 },
+                minWidth: 200
+            }}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
                         <SearchIcon />
-                    </InputAdornment>
+                    </InputAdornment> //search icon at the start of the input
                 ),
                 endAdornment: localValue && (
                     <InputAdornment position="end">
