@@ -129,7 +129,7 @@ const DepartmentAnalytics = ({ refreshKey }) => {
             </Box>
 
             <Collapse in={expanded}>
-                <Box sx={{ 
+                <Box sx={{
                     display: 'grid',
                     gridTemplateColumns: {
                         xs: 'repeat(2, 1fr)',
