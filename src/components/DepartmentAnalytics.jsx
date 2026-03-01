@@ -99,8 +99,8 @@ const DepartmentAnalytics = ({ refreshKey }) => {
                 <Grid container spacing={2}>
                     {/* Total Stats Card */}
                     <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Card sx={{ 
-                            bgcolor: 'primary.main', 
+                        <Card sx={{
+                            bgcolor: 'primary.main',
                             color: 'primary.contrastText',
                             height: '100%'
                         }}>
