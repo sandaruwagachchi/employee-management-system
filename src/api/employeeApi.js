@@ -29,6 +29,10 @@ export const employeeApi = {
     getAll: (page = 0, size = 10, sortBy = 'id', sortDir = 'asc') =>
         api.get(`/employees?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}`),
 
+    // Get ALL employees for export (no pagination)
+    getAllForExport: () =>
+        api.get(`/employees?page=0&size=10000&sortBy=id&sortDir=asc`),
+
     // Get single employee
     getById: (id) => api.get(`/employees/${id}`),
 

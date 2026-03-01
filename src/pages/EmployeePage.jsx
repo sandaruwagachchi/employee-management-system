@@ -13,12 +13,12 @@ import {
     Add as AddIcon,
     Brightness4 as DarkIcon,
     Brightness7 as LightIcon,
+    Download as DownloadIcon,
 } from '@mui/icons-material';
 import EmployeeTable from '../components/EmployeeTable';
 import EmployeeForm from '../components/EmployeeForm';
 import DeleteDialog from '../components/DeleteDialog';
-import SearchBar from '../components/SearchBar';
-import { employeeApi } from '../api/employeeApi';
+import SearchBar from '../components/SearchBar'; import { employeeApi } from '../api/employeeApi';
 
 function EmployeesPage({ darkMode, setDarkMode }) {
     const [employees, setEmployees] = useState([]);
@@ -128,6 +128,46 @@ function EmployeesPage({ darkMode, setDarkMode }) {
         }
     };
 
+    // Export to CSV
+    const handleExportCSV = async () => {
+        try {
+            // Fetch ALL employees for export
+            const response = await employeeApi.getAllForExport();
+            const allEmployees = response.data.content;
+
+            if (allEmployees.length === 0) {
+                showNotification('No data to export', 'warning');
+                return;
+            }
+
+            const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Department', 'Role', 'Salary', 'Hire Date'];
+            const csvRows = [
+                headers.join(','),
+                ...allEmployees.map(emp => [
+                    emp.id,
+                    `"${emp.firstName || ''}"`,
+                    `"${emp.lastName || ''}"`,
+                    `"${emp.email || ''}"`,
+                    `"${emp.department || ''}"`,
+                    `"${emp.role || ''}"`,
+                    emp.salary || '',
+                    emp.hireDate || ''
+                ].join(','))
+            ];
+
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `employees_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+            showNotification(`Exported ${allEmployees.length} employees to CSV`);
+        } catch (error) {
+            showNotification('Error exporting data', 'error');
+        }
+    };
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -155,14 +195,24 @@ function EmployeesPage({ darkMode, setDarkMode }) {
                         value={searchKeyword}
                         onChange={setSearchKeyword}
                     />
-                    <Button
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={handleAddClick}
-                        sx={{ whiteSpace: 'nowrap' }}
-                    >
-                        Add Employee
-                    </Button>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                        <Button
+                            variant="outlined"
+                            startIcon={<DownloadIcon />}
+                            onClick={handleExportCSV}
+                            sx={{ whiteSpace: 'nowrap' }}
+                        >
+                            Export CSV
+                        </Button>
+                        <Button
+                            variant="contained"
+                            startIcon={<AddIcon />}
+                            onClick={handleAddClick}
+                            sx={{ whiteSpace: 'nowrap' }}
+                        >
+                            Add Employee
+                        </Button>
+                    </Box>
                 </Box>
 
                 {/* Employee Table */}
