@@ -8,12 +8,12 @@ A full-stack web application for managing employee records. This project include
 
 Before you begin, make sure you have these installed on your machine:
 
-| Software | Version | Where to Download |
-|----------|---------|-------------------|
-| Java JDK | 17 or higher | https://adoptium.net/ |
-| Node.js | 18 or higher | https://nodejs.org/ |
-| MySQL | 8.0 or higher | https://dev.mysql.com/downloads/ |
-| Maven | 3.6 or higher | https://maven.apache.org/download.cgi |
+| Software | Version |
+|----------|---------|
+| Java JDK | 17.0.12 |
+| Node.js | 22.20.0| 
+| MySQL | 8.0.45.0 | 
+| Maven | 3.9.12 | 
 
 You can verify your installations by running:
 
@@ -161,67 +161,5 @@ REACT_APP_API_URL=http://localhost:9090/api
 
 ---
 
-## Common Issues & Fixes
 
-### Port 9090 already in use
 
-Find and kill the process:
-
-**Windows:**
-```bash
-netstat -ano | findstr :9090
-taskkill /PID <PID_NUMBER> /F
-```
-
-**Mac/Linux:**
-```bash
-lsof -i :9090
-kill -9 <PID_NUMBER>
-```
-
-### Cannot connect to MySQL
-
-1. Check if MySQL service is running
-2. Verify your username and password in `application.properties`
-3. Make sure the database `employee_db` exists
-
-### Frontend can't reach backend
-
-1. Make sure backend is running on port 9090
-2. Check for CORS errors in browser console
-3. Verify the API URL in frontend configuration
-
----
-
-## Project Structure
-
-```
-Employee Management System/
-├── backend/                    # Spring Boot API
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/          # Java source code
-│   │   │   └── resources/     # Configuration files
-│   │   └── test/              # Unit tests
-│   └── pom.xml                # Maven dependencies
-│
-└── frontend/                   # React application
-    ├── src/
-    │   ├── components/        # React components
-    │   ├── services/          # API calls
-    │   └── App.js             # Main component
-    └── package.json           # npm dependencies
-```
-
----
-
-## Need Help?
-
-If you run into any issues:
-
-1. Check the error message carefully
-2. Make sure all prerequisites are installed correctly
-3. Verify database connection settings
-4. Ensure both backend and frontend are running
-
----
