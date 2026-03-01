@@ -18,7 +18,9 @@ import {
 import EmployeeTable from '../components/EmployeeTable';
 import EmployeeForm from '../components/EmployeeForm';
 import DeleteDialog from '../components/DeleteDialog';
-import SearchBar from '../components/SearchBar'; import { employeeApi } from '../api/employeeApi';
+import SearchBar from '../components/SearchBar';
+import DepartmentAnalytics from '../components/DepartmentAnalytics';
+import { employeeApi } from '../api/employeeApi';
 
 function EmployeesPage({ darkMode, setDarkMode }) {
     const [employees, setEmployees] = useState([]);
@@ -41,6 +43,9 @@ function EmployeesPage({ darkMode, setDarkMode }) {
         message: '',
         severity: 'success'
     });
+
+    // Analytics refresh key
+    const [analyticsKey, setAnalyticsKey] = useState(0);
 
     // Fetch employees
     const fetchEmployees = useCallback(async () => {
@@ -110,6 +115,7 @@ function EmployeesPage({ darkMode, setDarkMode }) {
             }
             setFormOpen(false);
             fetchEmployees();
+            setAnalyticsKey(prev => prev + 1); // Refresh analytics
         } catch (error) {
             const message = error.response?.data?.message || 'Operation failed';
             showNotification(message, 'error');
@@ -123,6 +129,7 @@ function EmployeesPage({ darkMode, setDarkMode }) {
             showNotification('Employee deleted successfully');
             setDeleteDialogOpen(false);
             fetchEmployees();
+            setAnalyticsKey(prev => prev + 1); // Refresh analytics
         } catch (error) {
             showNotification('Error deleting employee', 'error');
         }
@@ -214,6 +221,9 @@ function EmployeesPage({ darkMode, setDarkMode }) {
                         </Button>
                     </Box>
                 </Box>
+
+                {/* Department Analytics */}
+                <DepartmentAnalytics refreshKey={analyticsKey} />
 
                 {/* Employee Table */}
                 <EmployeeTable
